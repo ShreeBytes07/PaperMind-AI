@@ -1,0 +1,11 @@
+﻿COMBINED QUESTION PAPER
+Subject: Java, Python, C and SQL
+
+1. Explain inheritance in Java with a simple example.
+2. Write a Java program to demonstrate method overloading.
+3. Explain exception handling using try-catch in Java.
+4. Write a Python program to check whether a number is even or odd.
+5. Explain the difference between a Python list and a tuple.
+6. Write a C program to find the largest of two numbers.
+7. Write an SQL query to display all records from the STUDENT table.
+8. Explain the difference between DELETE and TRUNCATE commands in SQL.

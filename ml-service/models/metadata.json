@@ -1,0 +1,5 @@
+{
+  "training_rows": 90,
+  "topic_count": 30,
+  "note": "Small starter dataset. Evaluation is preliminary; predictions are not production-validated."
+}

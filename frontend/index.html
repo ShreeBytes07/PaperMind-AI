@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#101827">
+    <meta name="description"
+          content="PaperMind AI - Extract, analyze, and visualize question paper insights.">
+
+    <title>PaperMind AI | Question Paper Intelligence</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="js/script.js" defer></script>
+</head>
+
+<body>
+    <header class="header">
+        <a class="brand" href="#" aria-label="PaperMind AI home">
+            <span class="brand-icon">P</span>
+            <span>PaperMind <strong>AI</strong></span>
+        </a>
+
+        <div class="header-right">
+            <span class="status">
+                <span class="status-dot"></span>
+                Learning Dashboard
+            </span>
+        </div>
+    </header>
+
+    <nav class="main-nav" aria-label="Main navigation">
+        <a href="#overview">Overview</a>
+        <a href="#question-analyzer">Analyzer</a>
+        <a href="#paper-upload">Question Papers</a>
+        <a href="#individual-questions">Questions</a>
+        <a href="#question-map">Question Map</a>
+        <a href="#question-builder">Question Builder</a>
+        <a href="#topics-section">Java Topics</a>
+    </nav>
+
+    <main class="container">
+
+        <!-- HERO -->
+        <section class="hero" id="overview">
+            <div class="hero-content">
+                <span class="eyebrow">YOUR PERSONAL LEARNING SPACE</span>
+
+                <h1>
+                    Learn smarter.<br>
+                    <span>Understand deeper.</span>
+                </h1>
+
+                <p>
+                    Explore your syllabus, analyze questions with AI,
+                    and turn question papers into useful learning insights.
+                </p>
+
+                <a href="#question-analyzer" class="primary-link">
+                    Start analyzing
+                    <span aria-hidden="true">&rarr;</span>
+                </a>
+            </div>
+
+            <div class="hero-visual" aria-hidden="true">
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+
+                <div class="hero-center">
+                    <span class="hero-brain">AI</span>
+                    <span class="hero-caption">LEARN + ANALYZE</span>
+                </div>
+
+                <span class="floating-tag tag-top">Smart Analysis</span>
+                <span class="floating-tag tag-bottom">Java Learning</span>
+            </div>
+        </section>
+
+        <!-- DASHBOARD SUMMARY -->
+        <section class="stats-grid" aria-label="Dashboard summary">
+            <article class="stat-card">
+                <div class="stat-icon purple-icon">T</div>
+                <div>
+                    <p class="stat-label">SYLLABUS TOPICS</p>
+                    <h2 id="topic-count">--</h2>
+                    <p class="stat-description">Topics from MySQL</p>
+                </div>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-icon blue-icon">AI</div>
+                <div>
+                    <p class="stat-label">QUESTION ANALYZER</p>
+                    <h2>Ready</h2>
+                    <p class="stat-description">Powered by Python ML</p>
+                </div>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-icon green-icon">DB</div>
+                <div>
+                    <p class="stat-label">DATABASE</p>
+                    <h2 id="connection-status">Checking</h2>
+                    <p class="stat-description" id="connection-message">
+                        Connecting to backend
+                    </p>
+                </div>
+            </article>
+        </section>
+
+        <!-- MANUAL QUESTION ANALYZER -->
+        <section class="panel" id="question-analyzer">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">AI-POWERED LEARNING</span>
+                    <h2>Question Analyzer</h2>
+                    <p>
+                        Enter a question to identify concepts, difficulty,
+                        Bloom's level, and suggested marks.
+                    </p>
+                </div>
+
+                <span class="section-badge">AI ANALYSIS</span>
+            </div>
+
+            <form id="analyze-form">
+                <label for="question-input">Your question</label>
+
+                <textarea
+                    id="question-input"
+                    rows="5"
+                    maxlength="5000"
+                    placeholder="Example: What is a class in Java? Explain with an example."
+                    required
+                ></textarea>
+
+                <div class="form-footer">
+                    <span id="question-char-count">0 / 5000 characters</span>
+
+                    <button id="analyze-button" type="submit">
+                        <span>Analyze Question</span>
+                        <span aria-hidden="true">&rarr;</span>
+                    </button>
+                </div>
+
+                <p id="analyze-status" class="status-message" role="status">
+                    Ready to analyze your question.
+                </p>
+            </form>
+
+            <!-- ANALYSIS RESULTS -->
+            <section
+                id="analysis-results"
+                class="results-section"
+                hidden
+                aria-live="polite"
+            >
+                <div class="results-heading">
+                    <div>
+                        <span class="eyebrow">ANALYSIS REPORT</span>
+                        <h3>Your Results</h3>
+                    </div>
+                    <span class="result-pill">Completed</span>
+                </div>
+
+                <div class="analysis-grid">
+                    <article class="result-card">
+                        <span class="result-label">Main Concept</span>
+                        <h3 id="result-concept">--</h3>
+                    </article>
+
+                    <article class="result-card">
+                        <span class="result-label">Difficulty</span>
+                        <h3 id="result-difficulty">--</h3>
+                        <p id="result-difficulty-reason"></p>
+                    </article>
+
+                    <article class="result-card">
+                        <span class="result-label">Bloom's Taxonomy</span>
+                        <h3 id="result-bloom">--</h3>
+                    </article>
+
+                    <article class="result-card">
+                        <span class="result-label">Suggested Marks</span>
+                        <h3 id="result-marks">--</h3>
+                    </article>
+
+                    <article class="result-card">
+                        <span class="result-label">Analysis Score</span>
+                        <h3 id="result-score">--</h3>
+                        <p>Heuristic score, not model confidence.</p>
+                    </article>
+                </div>
+
+                <article class="detail-card">
+                    <h4>Supporting Concepts</h4>
+                    <p id="result-supporting">--</p>
+                </article>
+
+                <article class="detail-card">
+                    <h4>Detected Concepts</h4>
+                    <ul id="result-detected"></ul>
+                </article>
+
+                <article class="detail-card">
+                    <h4>Analysis Explanation</h4>
+                    <p id="result-explanation">--</p>
+                </article>
+            </section>
+        </section>
+
+        <!-- PAPER UPLOAD -->
+        <section class="panel" id="paper-upload">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">PAPER PROCESSING</span>
+                    <h2>Upload Question Paper</h2>
+                    <p>
+                        Save a text question paper, extract questions,
+                        and analyze them with your ML service.
+                    </p>
+                </div>
+
+                <span class="section-badge">PAPER AI</span>
+            </div>
+
+            <form id="paper-upload-form">
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="paper-name">Paper name</label>
+                        <input
+                            id="paper-name"
+                            type="text"
+                            maxlength="150"
+                            placeholder="Java Internal Assessment"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="paper-subject">Subject</label>
+                        <input
+                            id="paper-subject"
+                            type="text"
+                            maxlength="100"
+                            placeholder="Java Programming"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="upload-box">
+                    <div class="upload-symbol" aria-hidden="true">PDF · IMG</div>
+
+                    <label for="paper-file" class="upload-title">
+                        Select your question paper
+                    </label>
+
+                    <p>
+                        Supported formats: TXT, PDF, JPG and PNG. Maximum size: 5 MB.
+                    </p>
+
+                    <input
+                        id="paper-file"
+                        type="file"
+                        accept=".txt,.pdf,.jpg,.jpeg,.png,text/plain,application/pdf,image/jpeg,image/png"
+                        required
+                    >
+
+                    <p id="selected-file" class="selected-file">
+                        No file selected.
+                    </p>
+                </div>
+
+                <div class="form-footer">
+                    <span id="upload-status"
+                          class="status-message"
+                          role="status">
+                        Ready to upload.
+                    </span>
+
+                    <button id="upload-button" type="submit">
+                        Upload &amp; Analyze
+                        <span aria-hidden="true">&rarr;</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- PAPER RESULTS -->
+            <section
+                id="paper-results"
+                class="results-section"
+                hidden
+                aria-live="polite"
+            >
+                <div class="results-heading">
+                    <div>
+                        <span class="eyebrow">PAPER REPORT</span>
+                        <h3>Processing Results</h3>
+                    </div>
+                    <span class="result-pill">Processed</span>
+                </div>
+
+                <p id="paper-summary" class="paper-summary"></p>
+
+                <div id="paper-errors" class="error-list" hidden></div>
+
+                <h4 class="list-heading">Analyzed Questions</h4>
+
+                <ol id="paper-question-results"
+                    class="paper-question-list"></ol>
+            </section>
+        </section>
+
+
+        <!-- INTERACTIVE PAPER ANALYTICS DASHBOARD -->
+        <section class="analytics-shell" id="paper-analytics" hidden>
+            <div class="analytics-hero">
+                <div class="analytics-hero-copy">
+                    <span class="eyebrow">PAPERMIND INTELLIGENCE / LIVE REPORT</span>
+                    <h2>Paper analytics</h2>
+                    <p id="analytics-paper-caption">Your uploaded paper, translated into clear insights.</p>
+                </div>
+                <div class="analytics-live-pill"><i></i> Analysis report</div>
+                <div class="analytics-hero-orb orb-a"></div><div class="analytics-hero-orb orb-b"></div>
+            </div>
+
+            <div class="analytics-kpi-grid">
+                <article class="analytics-kpi kpi-total"><span class="kpi-icon">▤</span><span class="kpi-label">TOTAL QUESTIONS</span><strong id="analytics-total">0</strong><small>Successfully extracted</small></article>
+                <article class="analytics-kpi kpi-analyzed"><span class="kpi-icon">✓</span><span class="kpi-label">ANALYZED</span><strong id="analytics-analyzed">0</strong><small>With AI analysis</small></article>
+                <article class="analytics-kpi kpi-pending"><span class="kpi-icon">◷</span><span class="kpi-label">PENDING / SKIPPED</span><strong id="analytics-pending">0</strong><small>Not yet analyzed</small></article>
+                <article class="analytics-kpi kpi-coverage"><span class="kpi-icon">◌</span><span class="kpi-label">ANALYSIS COVERAGE</span><strong id="analytics-coverage">0%</strong><small>Analyzed out of extracted</small><div class="coverage-track"><span id="analytics-coverage-fill"></span></div></article>
+            </div>
+
+            <div class="analytics-toolbar">
+                <div><span class="eyebrow">EXPLORE BY SUBJECT</span><h3>Choose a subject to drill down</h3></div>
+                <div id="analytics-subject-filters" class="subject-filter-list" aria-label="Filter analytics by subject"></div>
+            </div>
+
+            <div class="analytics-visual-grid">
+                <article class="viz-card viz-subjects">
+                    <div class="viz-heading"><div><span class="viz-kicker">01 / PAPER COMPOSITION</span><h3>Subject distribution</h3><p>How the questions are spread across subjects.</p></div><span class="viz-tag">Click a bar to filter</span></div>
+                    <div class="chart-wrap chart-tall"><canvas id="subject-chart" aria-label="Subject question distribution chart"></canvas></div>
+                </article>
+                <article class="viz-card viz-difficulty">
+                    <div class="viz-heading"><div><span class="viz-kicker">02 / QUESTION LEVEL</span><h3>Difficulty breakdown</h3><p id="difficulty-chart-caption">Easy, medium and hard questions.</p></div><span class="viz-tag">Interactive</span></div>
+                    <div class="chart-wrap chart-doughnut"><canvas id="difficulty-chart" aria-label="Difficulty breakdown chart"></canvas></div>
+                    <div id="difficulty-legend" class="custom-chart-legend"></div>
+                </article>
+                <article class="viz-card viz-compare">
+                    <div class="viz-heading"><div><span class="viz-kicker">03 / SUBJECT COMPARISON</span><h3>Difficulty by subject</h3><p>Compare easy, medium and hard across subjects.</p></div></div>
+                    <div class="chart-wrap chart-medium"><canvas id="subject-difficulty-chart" aria-label="Subject difficulty comparison chart"></canvas></div>
+                </article>
+                <article class="viz-card viz-bloom">
+                    <div class="viz-heading"><div><span class="viz-kicker">04 / COGNITIVE SKILLS</span><h3>Bloom's taxonomy</h3><p>Which thinking levels are being tested?</p></div></div>
+                    <div class="chart-wrap chart-medium"><canvas id="bloom-chart" aria-label="Bloom taxonomy distribution chart"></canvas></div>
+                </article>
+                <article class="viz-card viz-marks">
+                    <div class="viz-heading"><div><span class="viz-kicker">05 / MARK ALLOCATION</span><h3>Marks distribution</h3><p>Question count grouped by suggested marks.</p></div></div>
+                    <div class="chart-wrap chart-medium"><canvas id="marks-chart" aria-label="Marks distribution chart"></canvas></div>
+                </article>
+                <article class="viz-card viz-insight">
+                    <div class="viz-heading"><div><span class="viz-kicker">06 / QUICK INSIGHT</span><h3>At a glance</h3><p>Key observations from the selected view.</p></div></div>
+                    <div id="analytics-insights" class="analytics-insights"><p>Upload and analyze a paper to generate insights.</p></div>
+                </article>
+            </div>
+            <p id="analytics-data-note" class="analytics-note"></p>
+        </section>
+
+        <!-- INDIVIDUAL QUESTIONS -->
+        <section class="panel" id="individual-questions">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">QUESTION LIBRARY</span>
+                    <h2>Individual Questions</h2>
+                    <p>Explore questions and their detailed analysis.</p>
+                </div>
+                <span class="section-badge">QUESTION DETAILS</span>
+            </div>
+
+            <div id="individual-question-list" class="individual-question-list">
+                <p class="empty-state">
+                    Upload and analyze a question paper to view individual questions.
+                </p>
+            </div>
+        </section>
+
+        <!-- QUESTION MAP -->
+        <section class="panel" id="question-map">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">CONCEPT VISUALIZATION</span>
+                    <h2>Question Map</h2>
+                    <p>Explore analyzed questions grouped by their main concepts.</p>
+                </div>
+                <span class="section-badge">CONCEPT MAP</span>
+            </div>
+
+            <div id="question-map-content" class="question-map-content">
+                <p class="empty-state">
+                    The question map will appear after question analysis.
+                </p>
+            </div>
+        </section>
+
+        <!-- QUESTION PAPER BUILDER -->
+        <section class="panel" id="question-builder">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">CUSTOM QUESTION PAPER</span>
+                    <h2>Question Paper Builder</h2>
+                    <p>Collect analyzed questions into a custom question paper.</p>
+                </div>
+                <span class="section-badge">PAPER BUILDER</span>
+            </div>
+
+            <div id="question-builder-list" class="question-builder-list">
+                <p class="empty-state">
+                    Add questions from the Individual Questions section to build your paper.
+                </p>
+            </div>
+
+            <div class="builder-summary">
+                <span id="builder-question-count">0 questions selected</span>
+                <span id="builder-total-marks">Total marks: 0</span>
+            </div>
+
+            <div class="builder-actions">
+                <button id="download-builder-button" type="button" disabled>
+                    Download Question Paper (PDF)
+                </button>
+                <button id="clear-builder-button" type="button">
+                    Clear selected questions
+                </button>
+            </div>
+        </section>
+
+        <!-- TOPICS -->
+        <section class="panel" id="topics-section">
+            <div class="section-heading topics-heading">
+                <div>
+                    <span class="eyebrow">YOUR SYLLABUS</span>
+                    <h2>Java Topics</h2>
+                    <p>Search topics loaded from your database.</p>
+                </div>
+
+                <div class="search-wrapper">
+                    <label for="search">Search topics</label>
+                    <input
+                        id="search"
+                        type="search"
+                        placeholder="Search Java topics..."
+                    >
+                </div>
+            </div>
+
+            <p id="message" class="status-message" role="status">
+                Connecting to PaperMind AI...
+            </p>
+
+            <div id="topics" class="topics-grid"></div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-brand">
+            PaperMind <strong>AI</strong>
+        </div>
+        <p>Learn smarter, one question at a time.</p>
+        <span>Academic Project Dashboard</span>
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
+

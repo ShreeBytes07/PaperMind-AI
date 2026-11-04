@@ -1,0 +1,70 @@
+# Environment files and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python virtual environments, caches, and test artifacts
+**/.venv/
+**/venv/
+**/env/
+**/__pycache__/
+*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+
+# Java build output
+*.class
+**/out/
+**/target/
+**/build/
+
+# Backups and alternate working snapshots
+**/*backup*
+**/*backup*/
+**/*-update/
+**/*.bak
+**/*.backup*
+**/*.before-*
+**/*.pre-*
+**/*.before.*
+**/*.pre.*
+
+# Local-only and generated project copies
+/PaperMind-AI/
+/frontend.zip
+
+# Database dumps and local database files
+**/db-dumps/
+**/database-dumps/
+*.dump
+*.dump.*
+*.sql.gz
+*.sql.zip
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*.db
+
+# Logs and uploaded user documents
+**/logs/
+*.log
+**/uploads/
+**/user-uploads/
+**/user_uploads/
+**/uploaded-documents/
+**/uploaded_documents/
+
+# MySQL Connector/J source distribution; keep its license and the required JAR
+/backend/lib/mysql-connector-j-26.10.0/*
+!/backend/lib/mysql-connector-j-26.10.0/LICENSE
+
+# IDE and OS metadata
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

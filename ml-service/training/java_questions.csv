@@ -1,0 +1,91 @@
+question,topic,difficulty,bloom
+Which command compiles a Java source file named Demo.java?,Java Commands,easy,Remember
+Explain the purpose of javac and java commands.,Java Commands,medium,Understand
+Write commands to compile and run StudentDemo.,Java Commands,medium,Apply
+Name four primitive data types in Java.,Data Types,easy,Remember
+Differentiate int and double with examples.,Data Types,medium,Understand
+"Choose data types for age, price, and a letter.",Data Types,medium,Apply
+Which package contains the Scanner class?,Scanner,easy,Remember
+Explain how Scanner reads an integer from keyboard input.,Scanner,medium,Understand
+Write Java code to read a student's name and age using Scanner.,Scanner,medium,Apply
+What is the purpose of a loop in Java?,Loops,easy,Remember
+Compare for and while loops.,Loops,medium,Analyze
+Write a loop to print numbers from 1 to 10.,Loops,easy,Apply
+State the syntax of a while loop.,While Loop,easy,Remember
+Explain when a while loop stops executing.,While Loop,medium,Understand
+Use a while loop to calculate the sum from 1 to n.,While Loop,hard,Apply
+Does a do-while loop test its condition before or after the body?,Do-While Loop,easy,Remember
+Explain why a do-while loop executes at least once.,Do-While Loop,medium,Understand
+Write a do-while loop that validates positive input.,Do-While Loop,hard,Apply
+What is a class in Java?,Classes,easy,Remember
+Explain the role of fields and methods inside a class.,Classes,medium,Understand
+Design a Book class with title and price fields.,Classes,medium,Create
+What is an object in Java?,Objects,easy,Remember
+Explain the relationship between a class and its objects.,Objects,medium,Understand
+Create two Student objects and assign different names.,Objects,medium,Apply
+What is a constructor?,Constructors,easy,Remember
+Differentiate a default and parameterized constructor.,Constructors,medium,Analyze
+Write a constructor that initializes product ID and name.,Constructors,medium,Apply
+What is a method in Java?,Methods,easy,Remember
+Explain parameters and return values in a method.,Methods,medium,Understand
+Write a method that returns the larger of two integers.,Methods,medium,Apply
+Which class is the root of Java's class hierarchy?,Object Class,easy,Remember
+Explain the purpose of toString() in the Object class.,Object Class,medium,Understand
+Override equals() in a Student class and explain its behavior.,Object Class,hard,Apply
+What does static mean for a Java field?,Static Variables,easy,Remember
+Compare static and instance variables.,Static Variables,medium,Analyze
+Create a counter shared by all objects of a class.,Static Variables,medium,Apply
+What is an array in Java?,Arrays,easy,Remember
+Explain why array indices start at zero.,Arrays,medium,Understand
+Find the largest element in an integer array.,Arrays,medium,Apply
+What is a two-dimensional array?,2D Arrays,easy,Remember
+Explain row and column indexing in a 2D array.,2D Arrays,medium,Understand
+Write code to add two matrices using 2D arrays.,2D Arrays,hard,Apply
+Name four commonly taught pillars of OOP.,OOP Concepts,easy,Remember
+Explain how OOP organizes a program around objects.,OOP Concepts,medium,Understand
+Design a class hierarchy that demonstrates two OOP principles.,OOP Concepts,hard,Create
+What is encapsulation?,Encapsulation,easy,Remember
+Explain why fields are often declared private.,Encapsulation,medium,Understand
+Implement a private balance field with validated deposit method.,Encapsulation,hard,Apply
+What is abstraction in object-oriented programming?,Abstraction,easy,Remember
+Differentiate abstraction and encapsulation.,Abstraction,medium,Analyze
+Design an abstract Shape class with an area method.,Abstraction,hard,Create
+Which keyword is used for class inheritance in Java?,Inheritance,easy,Remember
+Explain how a subclass inherits accessible members.,Inheritance,medium,Understand
+Create an Employee superclass and Manager subclass.,Inheritance,medium,Apply
+What does polymorphism mean in Java?,Polymorphism,easy,Remember
+Compare compile-time and runtime polymorphism.,Polymorphism,medium,Analyze
+Use method overriding to process different payment types.,Polymorphism,hard,Apply
+What is dynamic method dispatch?,Dynamic Method Dispatch,medium,Remember
+Explain how the runtime object determines an overridden method call.,Dynamic Method Dispatch,medium,Understand
+Trace an overridden method call through a superclass reference.,Dynamic Method Dispatch,hard,Analyze
+Which method is traditionally associated with object cloning?,Object Cloning,medium,Remember
+Explain shallow and deep copying.,Object Cloning,medium,Understand
+Discuss what a class must consider before supporting clone().,Object Cloning,hard,Evaluate
+Name keywords commonly used in Java exception handling.,Exception Handling,easy,Remember
+Explain the purpose of try and catch blocks.,Exception Handling,medium,Understand
+Write a try-catch example for invalid numeric input.,Exception Handling,medium,Apply
+When are checked exceptions checked by the compiler?,Checked Exceptions,medium,Remember
+Explain how a method can handle a checked exception.,Checked Exceptions,medium,Understand
+Read a file safely and handle IOException.,Checked Exceptions,hard,Apply
+Give one example of an unchecked exception in Java.,Unchecked Exceptions,easy,Remember
+Differentiate checked and unchecked exceptions.,Unchecked Exceptions,medium,Analyze
+Identify why NullPointerException occurs in a code scenario.,Unchecked Exceptions,medium,Analyze
+What is the purpose of the throw keyword?,throw,easy,Remember
+Explain the difference between throwing and declaring an exception.,throw,medium,Understand
+Use throw to reject an invalid age value.,throw,medium,Apply
+Where is the throws clause written in a method declaration?,throws,easy,Remember
+Explain how throws communicates possible exceptions to callers.,throws,medium,Understand
+Declare a method that may throw IOException and show handling.,throws,hard,Apply
+What is a thread in Java?,Threads,easy,Remember
+Compare extending Thread with implementing Runnable.,Threads,medium,Analyze
+Write a simple Runnable task and start it in a new thread.,Threads,hard,Apply
+Which Java API package provides file and path utilities?,File System,medium,Remember
+Explain the difference between a file path and file contents.,File System,medium,Understand
+Check whether a path exists using the NIO API.,File System,medium,Apply
+What is a generic class in Java?,Generic Classes,easy,Remember
+Explain how generics improve type safety.,Generic Classes,medium,Understand
+Create a generic Box<T> class that stores and returns a value.,Generic Classes,hard,Apply
+Are Java String objects mutable or immutable?,Strings,easy,Remember
+Compare == and equals() when comparing strings.,Strings,medium,Analyze
+Write code to count vowels in a string.,Strings,medium,Apply
